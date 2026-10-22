@@ -1,0 +1,17 @@
+{
+  "starting_Lives": 3,
+  "score_Rules": { "enemy_Killed": 20, "missed_Hit": -50, "life_Lost": 0 },
+  "minimum_Score": 0,
+  "player": { "attack_Range": 140, "contact_Distance": 30, "miss_Lockout_Seconds": 0.3 },
+  "slow_Motion_Time_Scale": 0.05,
+  "event_Log": { "max_Visible_Events": 6 },
+  "difficulty_Tiers": [
+    { "start_Time_Seconds": 0,   "spawn_Interval_Seconds": 1.6,  "enemy_Speed": 140, "max_Enemies_On_Screen": 3, "slow_Motion_Duration_Seconds": 1.25 },
+    { "start_Time_Seconds": 90,  "spawn_Interval_Seconds": 1.4,  "enemy_Speed": 155, "max_Enemies_On_Screen": 3, "slow_Motion_Duration_Seconds": 1.25 },
+    { "start_Time_Seconds": 180, "spawn_Interval_Seconds": 1.2,  "enemy_Speed": 170, "max_Enemies_On_Screen": 4, "slow_Motion_Duration_Seconds": 1.25 },
+    { "start_Time_Seconds": 270, "spawn_Interval_Seconds": 1.05, "enemy_Speed": 185, "max_Enemies_On_Screen": 4, "slow_Motion_Duration_Seconds": 1.15 },
+    { "start_Time_Seconds": 360, "spawn_Interval_Seconds": 0.9,  "enemy_Speed": 200, "max_Enemies_On_Screen": 5, "slow_Motion_Duration_Seconds": 1.05 },
+    { "start_Time_Seconds": 450, "spawn_Interval_Seconds": 0.65, "enemy_Speed": 240, "max_Enemies_On_Screen": 6, "slow_Motion_Duration_Seconds": 0.95 },
+    { "start_Time_Seconds": 540, "spawn_Interval_Seconds": 0.45, "enemy_Speed": 290, "max_Enemies_On_Screen": 8, "slow_Motion_Duration_Seconds": 0.85 }
+  ]
+}
