@@ -14,11 +14,23 @@ public static class ui_Texts
     /// <summary>HUD score, {0} = score.</summary>
     public const string score_Format = "SCORE : {0}";
 
+    /// <summary>HUD rhythm (top left), {0} = percent of the starting enemy speed.</summary>
+    public const string rhythm_Format = "RYTHME : {0} %";
+
+    /// <summary>Pause screen heading.</summary>
+    public const string pause_Title = "PAUSE";
+
+    /// <summary>Pause screen prompt.</summary>
+    public const string resume_Prompt = "Appuyez sur Espace pour reprendre";
+
     /// <summary>Game over heading.</summary>
     public const string game_Over_Title = "GAME OVER";
 
     /// <summary>Game over score line, {0} = score.</summary>
     public const string final_Score_Format = "Score : {0}";
+
+    /// <summary>Game over match duration line, {0} = "MM:SS".</summary>
+    public const string duration_Format = "Durée : {0}";
 
     /// <summary>Game over kill count line, {0} = count.</summary>
     public const string enemies_Killed_Format = "Ennemis tués : {0}";

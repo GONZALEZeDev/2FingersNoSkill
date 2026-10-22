@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using two_Fingers_No_Skill.core;
 using two_Fingers_No_Skill.input;
 using two_Fingers_No_Skill.rendering;
+using two_Fingers_No_Skill.systems;
 
 namespace two_Fingers_No_Skill.game_States;
 
@@ -15,7 +16,7 @@ public sealed class game_Over_State : i_Game_State
     private const float heading_Y = 220f;
     private const float first_Stat_Y = 320f;
     private const float stat_Line_Height = 30f;
-    private const float prompt_Y = 580f;
+    private const float prompt_Y = 600f;
 
     private readonly game_Services services;
     private readonly match_World finished_World;
@@ -56,6 +57,7 @@ public sealed class game_Over_State : i_Game_State
         var stat_Lines = new[]
         {
             format(ui_Texts.final_Score_Format, finished_World.score.current_Score),
+            string.Format(CultureInfo.InvariantCulture, ui_Texts.duration_Format, time_Formatter.format_Duration(finished_World.clock.elapsed_Game_Seconds)),
             format(ui_Texts.enemies_Killed_Format, finished_World.stats.enemies_Killed),
             format(ui_Texts.missed_Hits_Format, finished_World.stats.missed_Hits),
         };

@@ -22,6 +22,9 @@ public sealed class match_World
     private readonly enemy_Spawner spawner;
     private readonly List<enemy> enemy_List = new();
 
+    // The first tier is the starting rhythm (100%), so it is not announced.
+    private int announced_Tier_Index;
+
     /// <summary>
     /// Creates a fresh match: full lives, score at 0, no enemy.
     /// </summary>
@@ -63,6 +66,9 @@ public sealed class match_World
     /// <summary>Index of the active difficulty tier.</summary>
     public int current_Tier_Index => difficulty.get_Tier_Index_At(clock.elapsed_Game_Seconds);
 
+    /// <summary>Enemy speed of the active tier relative to the first one, in percent (100 at match start).</summary>
+    public int current_Rhythm_Percent => difficulty.get_Rhythm_Percent_At(clock.elapsed_Game_Seconds);
+
     /// <summary>Match score.</summary>
     public score_Manager score { get; }
 
@@ -85,6 +91,7 @@ public sealed class match_World
 
         var game_Delta = clock.advance(Math.Min(real_Delta_Seconds, max_Real_Delta_Seconds));
         player.update(game_Delta);
+        announce_Tier_Change();
         var tier = difficulty.get_Tier_At(clock.elapsed_Game_Seconds);
 
         if (spawner.try_Spawn(game_Delta, tier, enemy_List.Count, out var spawn_Side))
@@ -172,8 +179,23 @@ public sealed class match_World
     }
 
     /// <summary>
+    /// Publishes a rhythm_Increased event the first frame a new difficulty tier is active.
+    /// </summary>
+    private void announce_Tier_Change()
+    {
+        var tier_Index = current_Tier_Index;
+        if (tier_Index == announced_Tier_Index)
+        {
+            return;
+        }
+
+        announced_Tier_Index = tier_Index;
+        publish(game_Event_Type.rhythm_Increased, current_Rhythm_Percent);
+    }
+
+    /// <summary>
     /// Publishes an event stamped with the current match time.
     /// </summary>
-    private void publish(game_Event_Type event_Type) =>
-        event_Bus.publish(new game_Event(event_Type, clock.elapsed_Game_Seconds));
+    private void publish(game_Event_Type event_Type, int value = 0) =>
+        event_Bus.publish(new game_Event(event_Type, clock.elapsed_Game_Seconds, value));
 }

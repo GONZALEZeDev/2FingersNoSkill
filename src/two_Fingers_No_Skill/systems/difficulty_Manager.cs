@@ -39,4 +39,11 @@ public sealed class difficulty_Manager
     /// Returns the tier active at the given match time.
     /// </summary>
     public difficulty_Tier get_Tier_At(double elapsed_Game_Seconds) => tiers[get_Tier_Index_At(elapsed_Game_Seconds)];
+
+    /// <summary>
+    /// Returns the rhythm shown to the player: enemy walking speed of the active tier
+    /// relative to the first tier, as a rounded percentage (first tier = 100).
+    /// </summary>
+    public int get_Rhythm_Percent_At(double elapsed_Game_Seconds) =>
+        (int)Math.Round(get_Tier_At(elapsed_Game_Seconds).enemy_Speed / tiers[0].enemy_Speed * 100, MidpointRounding.AwayFromZero);
 }

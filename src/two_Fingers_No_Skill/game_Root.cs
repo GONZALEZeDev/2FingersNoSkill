@@ -49,7 +49,8 @@ public class game_Root : Game
             new SpriteBatch(GraphicsDevice),
             new shape_Renderer(GraphicsDevice),
             Content.Load<SpriteFont>("fonts/hud_Font"),
-            Content.Load<SpriteFont>("fonts/title_Font"));
+            Content.Load<SpriteFont>("fonts/title_Font"),
+            Content.Load<SpriteFont>("fonts/highlight_Font"));
 
         services = new game_Services(settings, state_Machine, new Random());
         state_Machine.change_State(new title_State(services));

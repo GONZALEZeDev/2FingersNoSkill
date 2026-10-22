@@ -51,6 +51,17 @@ public class score_Manager_Tests
     }
 
     [Fact]
+    public void rhythm_Increase_Gives_No_Points()
+    {
+        var score = create_Score();
+
+        send(score, game_Event_Type.enemy_Killed);
+        send(score, game_Event_Type.rhythm_Increased);
+
+        Assert.Equal(20, score.current_Score);
+    }
+
+    [Fact]
     public void score_Never_Goes_Below_Minimum()
     {
         var score = create_Score();

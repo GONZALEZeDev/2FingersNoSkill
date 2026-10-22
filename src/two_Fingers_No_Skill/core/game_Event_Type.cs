@@ -13,4 +13,7 @@ public enum game_Event_Type
 
     /// <summary>The player struck a side with no enemy in range.</summary>
     missed_Hit,
+
+    /// <summary>A new difficulty tier started; the event value holds the new rhythm percent.</summary>
+    rhythm_Increased,
 }

@@ -29,10 +29,18 @@ public sealed class playing_State : i_Game_State
     public match_World world { get; }
 
     /// <summary>
-    /// Applies strikes (left first, then right), advances the match, and switches to game over when needed.
+    /// Opens the pause screen on Space; otherwise applies strikes (left first, then right),
+    /// advances the match, and switches to game over when needed.
     /// </summary>
     public void update(double real_Delta_Seconds, input_Snapshot input)
     {
+        if (input.pause_Pressed)
+        {
+            // The match is simply not updated while the pause screen is active; it resumes this same instance.
+            services.state_Machine.change_State(new pause_State(services, this));
+            return;
+        }
+
         slide_Timer_Seconds += real_Delta_Seconds;
 
         if (input.left_Strike_Pressed)
@@ -58,6 +66,7 @@ public sealed class playing_State : i_Game_State
     public void draw(render_Context ctx)
     {
         world_Renderer.draw_Ground(ctx);
+        world_Renderer.draw_Strike_Zone_Ground(ctx, world.player, services.settings.player.attack_Range);
         world_Renderer.draw_Enemies(ctx, world.enemies);
         world_Renderer.draw_Player(ctx, world.player);
         if (services.is_Debug_View_Enabled)

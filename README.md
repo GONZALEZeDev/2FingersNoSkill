@@ -30,9 +30,19 @@ L'affichage et les entrées se vérifient en jouant.
 |---|---|
 | Clic gauche (M1) | Frapper à gauche / commencer une partie |
 | Clic droit (M2) | Frapper à droite |
+| Espace | Mettre en pause / reprendre la partie |
 | Entrée | Rejouer après un game over |
 | F1 | Afficher / masquer les zones de frappe (debug) |
 | Échap | Quitter |
+
+## Ce qu'affiche l'écran de jeu
+
+- En haut au centre : le score.
+- En haut à gauche : le rythme actuel, c'est-à-dire la vitesse des ennemis par rapport au début de partie (100 %).
+- En haut à droite : le timer de la partie (`MM:SS`).
+- En bas à gauche : le journal d'évènements. Les hausses de rythme y apparaissent en doré.
+- En bas à droite : les vies.
+- Au sol, en doré : la portée de frappe de chaque côté du joueur.
 
 ## Régler le jeu : `game_Settings.json`
 
@@ -96,6 +106,7 @@ et les noms imposés par les outils (`Content/`, `Content.mgcb`, `README.md`...)
 - **Nouveau type d'évènement** : une valeur dans `core/game_Event_Type.cs`, une règle dans `config/score_Rules.cs`
   (+ `score_Manager.get_Points_For`, + clé JSON), un libellé dans `systems/event_Log.cs`.
   Puis publie-le depuis `match_World` : score, stats et journal réagissent seuls via le bus d'évènements.
+  Un évènement peut porter un nombre (`game_Event.value`), comme le pourcentage de `rhythm_Increased`.
 - **Nouvel écran** : une classe qui implémente `game_States/i_Game_State.cs`,
   activée avec `services.state_Machine.change_State(...)`.
 - **Nouveau réglage** : une propriété dans la classe de `config/` correspondante, la même clé dans le JSON,

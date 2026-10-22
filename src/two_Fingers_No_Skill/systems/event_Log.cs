@@ -11,6 +11,7 @@ public sealed class event_Log
     private const string enemy_Killed_Label = "Ennemi tué";
     private const string life_Lost_Label = "Vie perdue";
     private const string missed_Hit_Label = "Coup raté";
+    private const string rhythm_Increased_Format = "Rythme : {0} %";
 
     private readonly int max_Entries;
     private readonly score_Rules rules;
@@ -37,7 +38,7 @@ public sealed class event_Log
     {
         // Same mapping as the score manager, so the log and the score always agree on the points.
         var points = score_Manager.get_Points_For(rules, game_Event.event_Type);
-        entry_List.Add(new event_Log_Entry(game_Event.event_Type, build_Text(game_Event.event_Type, points)));
+        entry_List.Add(new event_Log_Entry(game_Event.event_Type, build_Text(game_Event.event_Type, points, game_Event.value)));
         if (entry_List.Count > max_Entries)
         {
             entry_List.RemoveAt(0);
@@ -45,10 +46,18 @@ public sealed class event_Log
     }
 
     /// <summary>
-    /// Builds the French line for an event, e.g. "Ennemi tué (+20)". No suffix when points are 0.
+    /// Builds the French line for an event, e.g. "Ennemi tué (+20)" or "Rythme : 111 %". No points suffix when points are 0.
     /// </summary>
-    public static string build_Text(game_Event_Type event_Type, int points)
+    /// <param name="event_Type">The event.</param>
+    /// <param name="points">Points the score rules give for it.</param>
+    /// <param name="value">Number attached to the event (rhythm percent), if any.</param>
+    public static string build_Text(game_Event_Type event_Type, int points, int value = 0)
     {
+        if (event_Type == game_Event_Type.rhythm_Increased)
+        {
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture, rhythm_Increased_Format, value);
+        }
+
         var label = event_Type switch
         {
             game_Event_Type.enemy_Killed => enemy_Killed_Label,

@@ -190,6 +190,33 @@ public class match_World_Tests
     }
 
     [Fact]
+    public void new_Match_Starts_At_One_Hundred_Percent_Rhythm()
+    {
+        Assert.Equal(100, create_World().current_Rhythm_Percent);
+    }
+
+    [Fact]
+    public void reaching_A_New_Tier_Logs_The_Rhythm_Once()
+    {
+        var settings = game_Settings.create_Default();
+        // Second tier after half a second, first spawn far later: the test only watches the tier change.
+        settings.difficulty_Tiers[0].spawn_Interval_Seconds = 100;
+        settings.difficulty_Tiers[1].start_Time_Seconds = 0.5;
+        var world = new match_World(settings, new Random(1));
+
+        for (var index = 0; index < 10; index++)
+        {
+            world.update(0.1);
+        }
+
+        var rhythm_Entries = world.event_Log.entries.Where(entry => entry.event_Type == game_Event_Type.rhythm_Increased).ToList();
+        Assert.Single(rhythm_Entries);
+        Assert.Equal("Rythme : 111 %", rhythm_Entries[0].text);
+        Assert.Equal(111, world.current_Rhythm_Percent);
+        Assert.Equal(0, world.score.current_Score);
+    }
+
+    [Fact]
     public void tier_Advances_With_Game_Time()
     {
         var world = create_World();

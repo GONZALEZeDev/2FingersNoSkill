@@ -23,7 +23,8 @@ public sealed class input_Handler
             left_Strike_Pressed: current_Mouse.LeftButton == ButtonState.Pressed && previous_Mouse.LeftButton == ButtonState.Released,
             right_Strike_Pressed: current_Mouse.RightButton == ButtonState.Pressed && previous_Mouse.RightButton == ButtonState.Released,
             confirm_Pressed: is_Just_Pressed(current_Keyboard, Keys.Enter),
-            debug_Toggle_Pressed: is_Just_Pressed(current_Keyboard, Keys.F1));
+            debug_Toggle_Pressed: is_Just_Pressed(current_Keyboard, Keys.F1),
+            pause_Pressed: is_Just_Pressed(current_Keyboard, Keys.Space));
 
         previous_Mouse = current_Mouse;
         previous_Keyboard = current_Keyboard;

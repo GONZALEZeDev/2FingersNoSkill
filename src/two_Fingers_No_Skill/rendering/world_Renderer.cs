@@ -57,7 +57,18 @@ public static class world_Renderer
     {
         var zone_Top = world_Layout.ground_Y - world_Layout.player_Height - 20f;
         var zone_Size = new Vector2(attack_Range, world_Layout.player_Height + 20f);
-        ctx.shapes.draw_Dashed_Outline(ctx.batch, new Vector2(target.center_X - target.half_Width - attack_Range, zone_Top), zone_Size, game_Colors.debug_Zone);
-        ctx.shapes.draw_Dashed_Outline(ctx.batch, new Vector2(target.center_X + target.half_Width, zone_Top), zone_Size, game_Colors.debug_Zone);
+        ctx.shapes.draw_Dashed_Outline(ctx.batch, new Vector2(target.center_X - target.half_Width - attack_Range, zone_Top), zone_Size, game_Colors.strike_Zone);
+        ctx.shapes.draw_Dashed_Outline(ctx.batch, new Vector2(target.center_X + target.half_Width, zone_Top), zone_Size, game_Colors.strike_Zone);
+    }
+
+    /// <summary>
+    /// Recolors the ground under both strike zones, so the player can always see how far a strike reaches.
+    /// Must be drawn after draw_Ground.
+    /// </summary>
+    public static void draw_Strike_Zone_Ground(render_Context ctx, player target, float attack_Range)
+    {
+        var size = new Vector2(attack_Range, ground_Thickness);
+        ctx.shapes.fill_Rectangle(ctx.batch, new Vector2(target.center_X - target.half_Width - attack_Range, world_Layout.ground_Y), size, game_Colors.strike_Zone);
+        ctx.shapes.fill_Rectangle(ctx.batch, new Vector2(target.center_X + target.half_Width, world_Layout.ground_Y), size, game_Colors.strike_Zone);
     }
 }

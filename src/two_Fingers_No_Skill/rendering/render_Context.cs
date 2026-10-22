@@ -11,12 +11,13 @@ public sealed class render_Context
     /// <summary>
     /// Groups the drawing tools.
     /// </summary>
-    public render_Context(SpriteBatch batch, shape_Renderer shapes, SpriteFont hud_Font, SpriteFont title_Font)
+    public render_Context(SpriteBatch batch, shape_Renderer shapes, SpriteFont hud_Font, SpriteFont title_Font, SpriteFont highlight_Font)
     {
         this.batch = batch;
         this.shapes = shapes;
         this.hud_Font = hud_Font;
         this.title_Font = title_Font;
+        this.highlight_Font = highlight_Font;
     }
 
     /// <summary>Sprite batch, already begun by the caller.</summary>
@@ -30,6 +31,9 @@ public sealed class render_Context
 
     /// <summary>Large font (title, game over).</summary>
     public SpriteFont title_Font { get; }
+
+    /// <summary>Slightly larger bold font for highlighted log lines.</summary>
+    public SpriteFont highlight_Font { get; }
 
     /// <summary>
     /// Draws a filled rectangle covering the whole screen (overlays, flash).

@@ -25,8 +25,11 @@ public static class game_Colors
     /// <summary>All text.</summary>
     public static readonly Color text = new(0xE8, 0xE8, 0xE8);
 
-    /// <summary>Strike zones shown in debug view.</summary>
-    public static readonly Color debug_Zone = new(0xF5, 0xC5, 0x42);
+    /// <summary>Strike zones: ground segments always, dashed outline in debug view.</summary>
+    public static readonly Color strike_Zone = new(0xF5, 0xC5, 0x42);
+
+    /// <summary>Gold used for highlighted information (rhythm increases).</summary>
+    public static readonly Color highlight = new(0xF5, 0xC5, 0x42);
 
     /// <summary>Restart flash.</summary>
     public static readonly Color flash = Color.White;

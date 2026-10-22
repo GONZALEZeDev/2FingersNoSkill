@@ -27,6 +27,19 @@ public class difficulty_Manager_Tests
         Assert.Equal(expected_Index, create_Manager().get_Tier_Index_At(elapsed_Seconds));
     }
 
+    [Theory]
+    [InlineData(0, 100)]
+    [InlineData(90, 111)]
+    [InlineData(180, 121)]
+    [InlineData(270, 132)]
+    [InlineData(360, 143)]
+    [InlineData(450, 171)]
+    [InlineData(540, 207)]
+    public void rhythm_Percent_Is_Enemy_Speed_Relative_To_First_Tier(double elapsed_Seconds, int expected_Percent)
+    {
+        Assert.Equal(expected_Percent, create_Manager().get_Rhythm_Percent_At(elapsed_Seconds));
+    }
+
     [Fact]
     public void slow_Motion_Duration_Per_Tier_Matches_Spec()
     {

@@ -19,6 +19,17 @@ public class event_Log_Tests
     }
 
     [Fact]
+    public void rhythm_Increase_Shows_The_New_Percent()
+    {
+        var log = new event_Log(6, game_Settings.create_Default().score_Rules);
+
+        log.handle_Event(new game_Event(game_Event_Type.rhythm_Increased, 90, 111));
+
+        Assert.Equal("Rythme : 111 %", log.entries[0].text);
+        Assert.Equal(game_Event_Type.rhythm_Increased, log.entries[0].event_Type);
+    }
+
+    [Fact]
     public void log_Keeps_Newest_Last_And_Drops_Oldest_Beyond_Max()
     {
         var log = new event_Log(6, game_Settings.create_Default().score_Rules);
