@@ -17,7 +17,9 @@ public static class hud_Renderer
     private const float life_Size = 22f;
     private const float life_Spacing = 8f;
     private const float log_Bottom_Y = 690f;
-    private const float log_Line_Spacing = 2f;
+    // Negative: the Consolas line spacing includes extra leading, so lines are pulled closer together
+    // to keep a full log below the ground line.
+    private const float log_Line_Spacing = -4f;
     private const float log_Opacity_Step = 0.15f;
     private const float log_Min_Opacity = 0.25f;
     private const float slide_Distance = 400f;
